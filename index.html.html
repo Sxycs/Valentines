@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Valentine 💘</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+.valentine-qr {
+  margin-top: 25px;
+}
+
+.valentine-qr p {
+  color: #ff4d6d;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.heart {
+  width: 180px;
+  height: 160px;
+  position: relative;
+  margin: auto;
+  background: #ff4d6d;
+  transform: rotate(-45deg);
+  border-radius: 20px;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 160px;
+  background: #ff4d6d;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -90px;
+  left: 0;
+}
+
+.heart::after {
+  left: 90px;
+  top: 0;
+}
+
+.heart img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(45deg);
+  width: 110px;
+  background: white;
+  padding: 10px;
+  border-radius: 15px;
+}
+.wave {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 15px;
+}
+
+.bar {
+  width: 6px;
+  height: 20px;
+  background: #ff4d6d;
+  animation: bounce 1s infinite ease-in-out;
+}
+
+.bar:nth-child(2) { animation-delay: .1s; }
+.bar:nth-child(3) { animation-delay: .2s; }
+.bar:nth-child(4) { animation-delay: .3s; }
+
+@keyframes bounce {
+  0%, 100% { height: 10px; }
+  50% { height: 30px; }
+}
+body {
+  margin: 0;
+  font-family: 'Poppins', 'Comic Sans MS', sans-serif;
+  background: linear-gradient(135deg, #ff9aa2, #ffd6e0);
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  max-width: 420px;
+  width: 90%;
+  margin: auto;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  z-index: 2;
+}
+
+h1 {
+  color: #ff4d6d;
+}
+
+p {
+  font-size: 1.1rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+button {
+  border: none;
+  padding: 15px 25px;
+  font-size: 1.1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+#yesBtn, #yesBtn2 {
+  background: #ff4d6d;
+  color: white;
+}
+
+#noBtn, #noBtn2 {
+  background: #ccc;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Hearts */
+.heart {
+  position: absolute;
+  font-size: 20px;
+  animation: floatUp 6s linear infinite;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(100vh); opacity: 1; }
+  to { transform: translateY(-10vh); opacity: 0; }
+}
+
+/* Confetti */
+.confetti {
+  position: absolute;
+  font-size: 18px;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  from { transform: translateY(-10vh); opacity: 1; }
+  to { transform: translateY(100vh); opacity: 0; }
+}
+
+/* Rabbit */
+.rabbit svg {
+  width: 130px;
+  margin: 15px auto;
+}
+
+/* Hugging effect */
+.hug {
+  animation: hug 1s infinite alternate;
+}
+
+@keyframes hug {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
+}
+
+.angry {
+  background: #ff6b6b;
+  color: white;
+}
+</style>
+</head>
+
+<body>
+<audio id="voiceMessage">
+  <source src="myvoice.mp3" type="audio/mpeg">
+</audio>
+<audio id="bgMusic" loop>
+  <source src="mi-corazon-es-tuyo.mp3" type="audio/mpeg">
+</audio>
+
+<!-- 💘 SCREEN 1 -->
+<div class="container" id="screen1">
+  <h1>Deylin Alvarez</h1>
+  <p>will you be my valentines 💘</p>
+
+  <div class="rabbit hug">
+    <svg viewBox="0 0 100 100">
+      <rect x="20" y="30" width="60" height="50" rx="8" fill="#fff"/>
+      <rect x="30" y="5" width="12" height="30" rx="6" fill="#fff"/>
+      <rect x="58" y="5" width="12" height="30" rx="6" fill="#fff"/>
+      <rect x="35" y="50" width="8" height="8" fill="#000"/>
+      <rect x="57" y="50" width="8" height="8" fill="#000"/>
+      <rect x="47" y="65" width="6" height="4" fill="#ff4d6d"/>
+    </svg>
+  </div>
+
+  <div class="buttons">
+    <button id="yesBtn" onclick="yesFirst()">Yes 💖</button>
+    <button id="noBtn" onmouseover="runAway(this)" onclick="noFirst()">No 😢</button>
+  </div>
+</div>
+
+<!-- 💕 SCREEN 2 -->
+<div class="container hidden" id="screen2">
+  <h1>One more question 💕</h1>
+  <p>Will you go on a date with me this February 14th as the love of my life?</p>
+
+  <div class="rabbit hug">
+    <svg viewBox="0 0 100 100">
+      <rect x="20" y="30" width="60" height="50" rx="8" fill="#fff"/>
+      <rect x="30" y="5" width="12" height="30" rx="6" fill="#fff"/>
+      <rect x="58" y="5" width="12" height="30" rx="6" fill="#fff"/>
+      <rect x="35" y="50" width="8" height="8" fill="#000"/>
+      <rect x="57" y="50" width="8" height="8" fill="#000"/>
+      <rect x="47" y="65" width="6" height="4" fill="#ff4d6d"/>
+    </svg>
+  </div>
+
+  <div class="buttons">
+    <button id="yesBtn2" onclick="yesSecond()">Yes 💘</button>
+    <button id="noBtn2" onmouseover="runAway(this)" onclick="noSecond()">No 💔</button>
+  </div>
+</div>
+
+<!-- 😡 ANGRY -->
+<div class="container angry hidden" id="angryScreen">
+  <h1>HOW DARE YOU SAY NO TO ME 😡</h1>
+  <div class="rabbit">
+    🐰💢
+  </div>
+</div>
+
+<!-- 💌 LOVE LETTER -->
+<div class="container hidden" id="letterScreen">
+<div class="valentine-qr">
+  <p>Scan me 💘</p>
+  <div class="heart">
+    <img id="qrCode" alt="Valentine QR Code">
+  </div>
+</div>
+  <h1>My Love 💖</h1>
+
+  <div class="rabbit" id="letterRabbit">
+    🐰💗
+  </div>
+
+  <p>
+    From the moment you came into my life, everything felt a little brighter.
+    You make me smile without trying, and you make my heart feel calm and excited
+    at the same time. Being with you feels natural, like it’s exactly where I’m
+    meant to be.
+    <br><br>
+    I don’t need perfect moments or big promises. All I want is to laugh with you,
+    grow with you, and choose you every single day. You are special to me in ways
+    I can’t fully explain, but I hope I show it in everything I do.
+    <br><br>
+    Thank you for being you. Thank you for being my Valentine.
+    <br><br>
+    With all my heart ❤️
+  </p>
+
+  <div class="buttons">
+    <button onclick="playVoice()">▶️ Play</button>
+    <button onclick="document.getElementById('voiceMessage').pause()">⏸ Pause</button>
+    <button onclick="
+      const v = document.getElementById('voiceMessage');
+      v.currentTime = 0;
+      playVoice();
+    ">🔁 Replay</button>
+  </div>
+
+  <div id="wave" class="wave hidden">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
+</div>
+
+  <button onclick="playVoice()" style="
+    margin-top:20px;
+    background:#ff4d6d;
+    color:white;
+    padding:14px 22px;
+    border:none;
+    border-radius:12px;
+    font-size:1rem;
+    cursor:pointer;
+  ">
+    ▶️ Play My Voice
+  </button>
+</div>
+
+<script>
+// CHANGE THIS to your final website link
+const websiteURL = "https://YOUR-GITHUB-USERNAME.github.io/YOUR-REPO-NAME/";
+
+document.getElementById("qrCode").src =
+  "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=" +
+  encodeURIComponent(websiteURL);
+function playVoice() {
+  document.getElementById("voiceMessage").play();
+}
+let yesScale1 = 1;
+let yesScale2 = 1;
+let noCount2 = 0;
+let musicStarted = false;
+
+function startMusic() {
+  if (!musicStarted) {
+    document.getElementById("bgMusic").play().catch(()=>{});
+    musicStarted = true;
+  }
+}
+
+function noFirst() {
+  startMusic();
+  yesScale1 += 0.25;
+  yesBtn.style.transform = `scale(${yesScale1})`;
+}
+
+function yesFirst() {
+  startMusic();
+  screen1.classList.add("hidden");
+  screen2.classList.remove("hidden");
+}
+
+function noSecond() {
+  noCount2++;
+  yesScale2 += 0.3;
+  yesBtn2.style.transform = `scale(${yesScale2})`;
+  if (noCount2 > 3) {
+    screen2.classList.add("hidden");
+    angryScreen.classList.remove("hidden");
+  }
+}
+
+function yesSecond() {
+  screen2.classList.add("hidden");
+  letterScreen.classList.remove("hidden");
+  confettiBoom();
+}
+
+function runAway(btn) {
+  btn.style.position = "fixed";
+  btn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+  btn.style.top = Math.random() * (window.innerHeight - 50) + "px";
+}
+
+/* Hearts */
+setInterval(() => {
+  const h = document.createElement("div");
+  h.className = "heart";
+  h.innerHTML = "💖";
+  h.style.left = Math.random() * 100 + "vw";
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 6000);
+}, 300);
+
+/* Confetti */
+function confettiBoom() {
+  for (let i = 0; i < 40; i++) {
+    const c = document.createElement("div");
+    c.className = "confetti";
+    c.innerHTML = "🎉";
+    c.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(c);
+    setTimeout(() => c.remove(), 3000);
+  }
+}
+</script>
+
+</body>
+</html>
